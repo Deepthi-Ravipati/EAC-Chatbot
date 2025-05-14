@@ -1,5 +1,4 @@
-# config.py
+import os
 
-# Replace this with your actual Gemini API key
-GEMINI_API_KEY = "AIzaSyCLH3Kh0OGpyhnTRIxxshJZwPRLLobhk4s"
-
+# Read API key from environment variable (safe for Render)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
