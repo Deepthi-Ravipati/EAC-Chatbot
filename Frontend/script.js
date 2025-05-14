@@ -16,7 +16,7 @@ function sendMessage() {
     addMessage("user", userInput);
 
     // Corrected API request
-    fetch("http://localhost:8000/chat", {
+    fetch("https://eac-chatbot-4jwb.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userInput }),
@@ -40,7 +40,7 @@ function sendMessage() {
     document.getElementById("user-input").value = ""; // Clear input after sending
 }
 function clearChat() {
-    fetch("http://localhost:8000/clear", {
+    fetch("https://eac-chatbot-4jwb.onrender.com/clear", {
         method: "POST"
     })
         .then(() => {
