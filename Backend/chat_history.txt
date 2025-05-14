@@ -1,0 +1,15 @@
+Patient: no thank you
+Doctor: You're welcome! If any new symptoms arise or if your fever doesn't improve in a few days, please consult your doctor for further evaluation. Take care and feel better!
+Patient: heloo
+Doctor: Hello! How can I assist you with your health concerns today?
+
+Patient: i have fever
+Doctor: A fever may indicate an infection. You can take acetaminophen or ibuprofen to lower your temperature. Are you experiencing any other symptoms like a cough or body aches?
+Patient: i have headache
+Doctor: A headache with a fever could indicate a cold or the flu. Make sure you're drinking plenty of fluids and resting. Is the headache mild or severe?
+
+Patient: mild headache
+Doctor: For a mild headache, try a cold compress and rest in a quiet, dark room. If it persists or worsens, consult your doctor. Has the headache improved since you first noticed it?
+
+Patient: yep
+Doctor: That's great to hear! Continue to monitor your symptoms and stay hydrated. If anything changes or worsens, don't hesitate to reach out to your doctor.
