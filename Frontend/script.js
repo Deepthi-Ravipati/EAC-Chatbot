@@ -15,32 +15,57 @@ function sendMessage() {
 
     addMessage("user", userInput);
 
-    // Corrected API request
-    fetch("https://eac-chatbot-4jwb.onrender.com/chat", {
+    fetch("http://localhost:8000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userInput }),
     })
         .then(response => response.json())
         .then(data => {
-            console.log("Bot response:", data);  // Debugging
-
-            // Correctly extract chatbot response
             if (data.response) {
                 addMessage("bot", data.response);
+                speakText(data.response); // Optional TTS
             } else {
-                addMessage("bot", "Error: Unexpected API response format.");
+                addMessage("bot", "Error: Unexpected API response.");
             }
         })
         .catch(error => {
-            console.error("Error fetching response:", error);
+            console.error("Error:", error);
             addMessage("bot", "Error: Unable to connect to chatbot.");
         });
 
-    document.getElementById("user-input").value = ""; // Clear input after sending
+    document.getElementById("user-input").value = "";
 }
+
+// Voice-to-Text using Web Speech API
+function startListening() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("user-input").value = transcript;
+        sendMessage();  // Auto-send after voice input
+    };
+
+    recognition.onerror = function (event) {
+        console.error("Speech recognition error:", event.error);
+        addMessage("bot", "Error using microphone.");
+    };
+}
+
+// Optional: Text-to-Speech
+function speakText(text) {
+    if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+// Clear chat history
 function clearChat() {
-    fetch("https://eac-chatbot-4jwb.onrender.com/clear", {
+    fetch("http://localhost:8000/clear", {
         method: "POST"
     })
         .then(() => {
@@ -48,6 +73,3 @@ function clearChat() {
             addMessage("bot", "Chat history cleared. How can I assist you now?");
         });
 }
-
-
-
