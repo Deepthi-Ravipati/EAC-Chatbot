@@ -1,4 +1,4 @@
-﻿body {
+body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
@@ -66,12 +66,25 @@
     border-radius: 5px;
 }
 
-#send-btn {
+#send-btn, #mic-btn {
     background: #0078D4;
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 8px 12px;
     margin-left: 10px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#mic-btn {
+    background: #28a745;
+}
+
+    #mic-btn:hover {
+        background: #218838;
+    }
+
+#send-btn:hover {
+    background: #005fa3;
 }
