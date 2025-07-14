@@ -5,7 +5,7 @@ function addMessage(sender, text) {
     messageDiv.className = sender === "user" ? "user-message message" : "bot-message message";
     messageDiv.textContent = text;
     chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to latest message
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 // Function to handle user input and send API request
@@ -15,7 +15,8 @@ function sendMessage() {
 
     addMessage("user", userInput);
 
-    fetch("http://localhost:8000/chat", {
+    // ✅ Use Render-deployed backend URL
+    fetch("https://eac-chatbot-4jwb.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userInput }),
@@ -46,7 +47,7 @@ function startListening() {
     recognition.onresult = function (event) {
         const transcript = event.results[0][0].transcript;
         document.getElementById("user-input").value = transcript;
-        sendMessage();  // Auto-send after voice input
+        sendMessage();
     };
 
     recognition.onerror = function (event) {
@@ -65,7 +66,7 @@ function speakText(text) {
 
 // Clear chat history
 function clearChat() {
-    fetch("http://localhost:8000/clear", {
+    fetch("https://eac-chatbot-4jwb.onrender.com/clear", {
         method: "POST"
     })
         .then(() => {
@@ -73,3 +74,4 @@ function clearChat() {
             addMessage("bot", "Chat history cleared. How can I assist you now?");
         });
 }
+
